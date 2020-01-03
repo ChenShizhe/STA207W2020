@@ -28,6 +28,6 @@ Discussion
 ## Learning Objectives
 
 * Students are able to distinguish association and causality.
-* Students gain basic familiarity to the potential outcome framework.
+* Students gain basic familiarity with the potential outcome framework.
 * Students are able to recognize the importance of experiment designs.
 

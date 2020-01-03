@@ -43,7 +43,7 @@ stripchart(perc.women~Judge, vertical = TRUE, data = Spock,
 
 ### ANOVA model
 
-* Cell mean model 
+* Cell means model 
 * Estimators of the means
 * Decomposition of sum of squares
 * Some basic properties 
