@@ -1,3 +1,10 @@
-This is a minimal example of a book based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown). Please see the page "[Get Started](https://bookdown.org/yihui/bookdown/get-started.html)" at https://bookdown.org/yihui/bookdown/ for how to compile this example into HTML. You may generate a copy of the book in `bookdown::pdf_book` format by calling `bookdown::render_book('index.Rmd', 'bookdown::pdf_book')`. More detailed instructions are available here https://bookdown.org/yihui/bookdown/build-the-book.html.
 
-You can find the preview of this example at https://bookdown.org/yihui/bookdown-demo/.
+Copyright 2020 Shizhe Chen
+
+## STA 207: Statistical Methods for Research II
+
+This book is intended to provide a summary of lectures for STA 207 in the winter quarter 2020. The files will be constantly updated, and might contain various typos and mistakes. 
+
+#### License
+
+This book is licensed using the [Creative Commons Attribution-NonCommercial 2.0 Generic (CC BY-NC 2.0) License](https://creativecommons.org/licenses/by-nc/2.0/) License.
