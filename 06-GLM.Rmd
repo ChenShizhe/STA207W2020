@@ -1,0 +1,56 @@
+---
+output:
+  bookdown::gitbook:
+  pdf_document: default
+  html_document: default
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
+library(tidyr) 
+library(dplyr)
+library(qwraps2)
+options(digits=2)
+```
+
+
+
+# Case-control Study {#ch:case}
+
+(In progress)
+
+## Case-control study
+
+* Study design
+* Sampling schemes
+* Comparisons to other studies
+    - randomized experiments
+    - retrospective cohort studies
+* Motivation for a case-control study
+* Estimands in a case-control study
+
+
+
+
+## Logistic regression
+
+* Logistic regression models
+* Estimation via maximum likelihood
+    - Simple case with analytic solution
+    - Score function
+    - Fisher information
+* Statistical inference
+    - Hypothesis testing
+    - Confidence intervals
+* Diagnostic plots
+    - Residuals
+    - Pearson residuals
+
+
+
+
+## Generalized linear model
+
+
+* Basics of generalized linear models
+* Practical use of GLM

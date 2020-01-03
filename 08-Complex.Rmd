@@ -1,0 +1,20 @@
+---
+output:
+  bookdown::gitbook:
+  pdf_document: default
+  html_document: default
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
+library(tidyr) 
+library(dplyr)
+library(qwraps2)
+options(digits=2)
+```
+
+
+# Complex data {#ch:dim}
+
+(Optional topic)
+

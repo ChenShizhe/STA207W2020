@@ -1,0 +1,45 @@
+---
+output:
+  bookdown::gitbook:
+  pdf_document: default
+  html_document: default
+---
+
+
+# Random and Mixed Effect Models {#ch:nested}
+
+(In progress)
+
+## Nested design
+
+* Motivations for a nested design
+* Nested design with fixed factors 
+    - Sampling scheme
+    - Hypothesis testing
+    - Causal interpretation
+* Nested design with random factors
+* Nested design with mixed factors
+    - Repeated measures design 
+
+
+## Random effects model
+
+* One-way ANOVA model with random effects
+* Estimation
+    - Decomposition of variances
+* Hypothesis testing and confidence intervals 
+
+### Mixed effects model 
+
+### Unbalanced mixed and random effect models
+
+
+
+## Learning Objectives
+
+* Students are able to write down the two-way ANOVA model with random effects.
+* Students can properly decide whether to model a factor using fixed or random effects. 
+* Students recognize the key assumptions associated with the random effects model. 
+* Students can implement the aforemened tasks in `R`.
+* Students can explore extension of random effect model from the Internet. 
+

@@ -1,0 +1,60 @@
+---
+output:
+  bookdown::gitbook:
+  pdf_document: default
+  html_document: default
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
+library(tidyr) 
+library(dplyr)
+library(qwraps2)
+options(digits=2)
+```
+
+
+# Repeated Measures Design {#ch:repeated}
+
+(In progress)
+
+## Repeated measures design
+
+* Motivation for repeated measures
+* Sampling scheme
+* Estimation, hypothesis, and causal interpretation
+* Split plot design
+* Longitudinal data
+    - Experiments
+    - Observational studies: prospective and retrospective cohort study
+    - Sampling scheme for observational studies
+
+
+## Analysis of repeated measures designs
+
+### Motivating data: blood pressure
+
+The relationship between the dose of a drug that increases blood pressure and the actual amount of increase in mean systolic blood pressure was investigated in a laboratory experiment. Twelve rabbits received in random order six different dose levels of the drug, with a suitable time interval between
+each drug administration. The increase in blood pressure was used as the response variable.
+
+### Two-way ANOVA model
+
+* Model
+* Estimators
+* Sum of squares and mean squares
+* Statistical inference
+    - Hypothesis testing
+    - Confidence intervals
+
+### More complicated repeated measures design
+
+* Two factors with repeated measures on one factor
+* Two factors with repeated measures on both
+* Split-plot design
+
+### Longitudinal data analysis
+
+We consider the rat growth data. Each rat is measured over 5 weeks. This type of data set is called longitudinal since the observations are taken over time. There is a covariate "mother's weight" (X). The idea is to see how rat weights vary over time since birth. In another example, logarithm of CD4 counts are listed for patients on three different treatments over time. Goal is to investigate how CD4 counts change over time and if age has any effect on
+this change. Note that in the first example, the times at which measurement are taken are the same for all subjects. In the second case times may be different for different patients.
+
+We consider several models to fit them in `R`. 
