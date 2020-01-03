@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 One-way ANOVA | Statistical Methods for Research II</title>
+  <meta name="description" content="This file contains code and lecture notes for STA 207" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 One-way ANOVA | Statistical Methods for Research II" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This file contains code and lecture notes for STA 207" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 One-way ANOVA | Statistical Methods for Research II" />
+  
+  <meta name="twitter:description" content="This file contains code and lecture notes for STA 207" />
+  
+
+<meta name="author" content="Shizhe Chen" />
+
+
+<meta name="date" content="2020-01-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="ch-causal.html"/>
+<link rel="next" href="ch-anovaII.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">STA 207</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="ch-causal.html"><a href="ch-causal.html"><i class="fa fa-check"></i><b>1</b> Causal Inference</a><ul>
+<li class="chapter" data-level="1.1" data-path="ch-causal.html"><a href="ch-causal.html#association-and-causality"><i class="fa fa-check"></i><b>1.1</b> Association and Causality</a></li>
+<li class="chapter" data-level="1.2" data-path="ch-causal.html"><a href="ch-causal.html#potential-outcomes"><i class="fa fa-check"></i><b>1.2</b> Potential Outcomes</a></li>
+<li class="chapter" data-level="1.3" data-path="ch-causal.html"><a href="ch-causal.html#experiments-v.s.-observational-studies"><i class="fa fa-check"></i><b>1.3</b> Experiments v.s. Observational Studies</a></li>
+<li class="chapter" data-level="1.4" data-path="ch-causal.html"><a href="ch-causal.html#learning-objectives"><i class="fa fa-check"></i><b>1.4</b> Learning Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="ch-anovaI.html"><a href="ch-anovaI.html"><i class="fa fa-check"></i><b>2</b> One-way ANOVA</a><ul>
+<li class="chapter" data-level="2.1" data-path="ch-anovaI.html"><a href="ch-anovaI.html#simple-randomized-experiments"><i class="fa fa-check"></i><b>2.1</b> Simple randomized experiments</a></li>
+<li class="chapter" data-level="2.2" data-path="ch-anovaI.html"><a href="ch-anovaI.html#one-way-anova"><i class="fa fa-check"></i><b>2.2</b> One-way ANOVA</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="ch-anovaI.html"><a href="ch-anovaI.html#a-motivating-example-the-spock-trial"><i class="fa fa-check"></i><b>2.2.1</b> A motivating example: the Spock trial</a></li>
+<li class="chapter" data-level="2.2.2" data-path="ch-anovaI.html"><a href="ch-anovaI.html#anova-model"><i class="fa fa-check"></i><b>2.2.2</b> ANOVA model</a></li>
+<li class="chapter" data-level="2.2.3" data-path="ch-anovaI.html"><a href="ch-anovaI.html#statistical-inference"><i class="fa fa-check"></i><b>2.2.3</b> Statistical inference</a></li>
+<li class="chapter" data-level="2.2.4" data-path="ch-anovaI.html"><a href="ch-anovaI.html#alternative-forms-of-the-anova-model"><i class="fa fa-check"></i><b>2.2.4</b> Alternative forms of the ANOVA model</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="ch-anovaI.html"><a href="ch-anovaI.html#model-diagnostics"><i class="fa fa-check"></i><b>2.3</b> Model diagnostics</a></li>
+<li class="chapter" data-level="2.4" data-path="ch-anovaI.html"><a href="ch-anovaI.html#learning-objectives-1"><i class="fa fa-check"></i><b>2.4</b> Learning Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ch-anovaII.html"><a href="ch-anovaII.html"><i class="fa fa-check"></i><b>3</b> Two-way ANOVA</a><ul>
+<li class="chapter" data-level="3.1" data-path="ch-anovaII.html"><a href="ch-anovaII.html#experiments-with-two-or-more-factors"><i class="fa fa-check"></i><b>3.1</b> Experiments with two (or more) factors</a></li>
+<li class="chapter" data-level="3.2" data-path="ch-anovaII.html"><a href="ch-anovaII.html#two-way-anova"><i class="fa fa-check"></i><b>3.2</b> Two-way ANOVA</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="ch-anovaII.html"><a href="ch-anovaII.html#a-motivating-example-hey-fever-relief-data-set"><i class="fa fa-check"></i><b>3.2.1</b> A motivating example: Hey fever relief data set</a></li>
+<li class="chapter" data-level="3.2.2" data-path="ch-anovaII.html"><a href="ch-anovaII.html#a-two-way-anova-model"><i class="fa fa-check"></i><b>3.2.2</b> A two-way ANOVA model</a></li>
+<li class="chapter" data-level="3.2.3" data-path="ch-anovaII.html"><a href="ch-anovaII.html#statistical-inference-1"><i class="fa fa-check"></i><b>3.2.3</b> Statistical inference</a></li>
+<li class="chapter" data-level="3.2.4" data-path="ch-anovaII.html"><a href="ch-anovaII.html#model-diagnostics-1"><i class="fa fa-check"></i><b>3.2.4</b> Model diagnostics</a></li>
+<li class="chapter" data-level="3.2.5" data-path="ch-anovaII.html"><a href="ch-anovaII.html#strategy-for-data-analysis"><i class="fa fa-check"></i><b>3.2.5</b> Strategy for data analysis</a></li>
+<li class="chapter" data-level="3.2.6" data-path="ch-anovaII.html"><a href="ch-anovaII.html#special-case-one-observation-per-cell"><i class="fa fa-check"></i><b>3.2.6</b> Special case: one observation per cell</a></li>
+<li class="chapter" data-level="3.2.7" data-path="ch-anovaII.html"><a href="ch-anovaII.html#unbalanced-two-way-anova"><i class="fa fa-check"></i><b>3.2.7</b> Unbalanced two-way ANOVA</a></li>
+<li class="chapter" data-level="3.2.8" data-path="ch-anovaII.html"><a href="ch-anovaII.html#analysis-of-stratified-experiments"><i class="fa fa-check"></i><b>3.2.8</b> Analysis of stratified experiments</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="ch-anovaII.html"><a href="ch-anovaII.html#learning-objectives-2"><i class="fa fa-check"></i><b>3.3</b> Learning Objectives</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Statistical Methods for Research II</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ch:anovaI" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> One-way ANOVA</h1>
+<div id="simple-randomized-experiments" class="section level2">
+<h2><span class="header-section-number">2.1</span> Simple randomized experiments</h2>
+<ul>
+<li>Motivation and real world applications of randomized experiments.</li>
+<li>Sampling schemes of a simple randomized experiment.</li>
+<li>Question of interest, null hypotheses, and their causal interpretation.</li>
+<li>Intuition of hypothesis testing.</li>
+<li>Practical concerns in the design of experiments.</li>
+</ul>
+</div>
+<div id="one-way-anova" class="section level2">
+<h2><span class="header-section-number">2.2</span> One-way ANOVA</h2>
+<div id="a-motivating-example-the-spock-trial" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> A motivating example: the Spock trial</h3>
+<p>In 1968 Dr. Benjamin Spock was tried in Boston for conspiring against the government for helping young men to escape the military draft. He was convicted by the Boston federal court, but the judgement was overturned by the Court of Appeals in 1969 for many reasons, one of which was cited as the bias of the presiding judge Francis Ford. Dr. Spock, a pediatrician, was very famous for his books on rearing of children, and thus was widely admired by women. As a matter of fact, the jury in Spock trial has no women. Note that jury panels, though randomly selected, should reflect the demographics. In any particular trial, there may not be any woman on the jury, but it is worthwhile to examine if the jury panels of Judge Ford had fewer women than other judges in Boston in few months before the trial. Data are available for jury panels for 7, but we investigate the data for only 4 judges including Judge Ford.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Spock &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file=</span><span class="st">&quot;./data/SpockTrial.csv&quot;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>, <span class="dt">sep=</span><span class="st">&quot;,&quot;</span>)
+Spock<span class="op">$</span>Judge&lt;-<span class="kw">as.factor</span>(Spock<span class="op">$</span>Judge);
+<span class="co"># Box plot with jittered points (from stackoverflow: https://stackoverflow.com/questions/23675735/how-to-add-boxplots-to-scatterplot-with-jitter)</span>
+<span class="kw">boxplot</span>(perc.women<span class="op">~</span>Judge,<span class="dt">data=</span>Spock)
+<span class="kw">stripchart</span>(perc.women<span class="op">~</span>Judge, <span class="dt">vertical =</span> <span class="ot">TRUE</span>, <span class="dt">data =</span> Spock, 
+    <span class="dt">method =</span> <span class="st">&quot;jitter&quot;</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&#39;blue&#39;</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:fig-anovaI"></span>
+<img src="STA207_bookdown_files/figure-html/fig-anovaI-1.png" alt="Box plot with jittered data points for the Spock trial data." width="80%" />
+<p class="caption">
+Figure 2.1: Box plot with jittered data points for the Spock trial data.
+</p>
+</div>
+</div>
+<div id="anova-model" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> ANOVA model</h3>
+<ul>
+<li>Cell mean model</li>
+<li>Estimators of the means</li>
+<li>Decomposition of sum of squares</li>
+<li>Some basic properties</li>
+</ul>
+<p>In the Spock trial data, we can use <code>aov()</code> to fit a one-way ANOVA model.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">anova.fit&lt;-<span class="st"> </span><span class="kw">aov</span>(perc.women<span class="op">~</span>Judge,<span class="dt">data=</span>Spock)
+<span class="kw">summary</span>(anova.fit)</code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value  Pr(&gt;F)    
+## Judge        3   1591     530    17.6 1.1e-06 ***
+## Residuals   29    874      30                    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>We can obtain the following.</p>
+<ul>
+<li><span class="math inline">\(n_1=\)</span> 9, <span class="math inline">\(n_2=\)</span> 6, <span class="math inline">\(n_3=\)</span> 9, <span class="math inline">\(n_4=\)</span> 9, and <span class="math inline">\(n_T=n_1+n_2+n_3+n_4=\)</span> 33.</li>
+<li><span class="math inline">\(\bar{Y}_{1,\cdot}=\)</span> 14.62, <span class="math inline">\(\bar{Y}_{2,\cdot}=\)</span> 33.62, <span class="math inline">\(\bar{Y}_{3,\cdot}=\)</span> 29.1, and <span class="math inline">\(\bar{Y}_{4,\cdot}=\)</span> 26.8.</li>
+<li><span class="math inline">\(SSE=\)</span> 873.52, <span class="math inline">\(df=\)</span> 29, and <span class="math inline">\(MSE=\)</span> 30.12.</li>
+<li><span class="math inline">\(SSTO=\)</span> 2464.8, <span class="math inline">\(df=\)</span> 32.</li>
+<li><span class="math inline">\(SSTR=\)</span> 1591.28, <span class="math inline">\(df=\)</span> 3, and <span class="math inline">\(MSTR=\)</span> 530.43.</li>
+</ul>
+</div>
+<div id="statistical-inference" class="section level3">
+<h3><span class="header-section-number">2.2.3</span> Statistical inference</h3>
+<ul>
+<li>Null hypothesis</li>
+<li>The F-test</li>
+<li>Testing a linear combination
+<ul>
+<li>Estimation</li>
+<li>Hypothesis testing</li>
+</ul></li>
+<li>(Simultaneous) confidence intervals</li>
+</ul>
+<p>To test the null hypothesis <span class="math inline">\(H_0: \mu_1=\mu_2=\mu_3=\mu_4\)</span> against the alternative <span class="math inline">\(H_1:\)</span> not all <span class="math inline">\(\mu_i\)</span>’s are equal. We can calculate the F-statistics <span class="math inline">\(F^*=\frac{MSTR}{MSE}=\)</span> , <span class="math inline">\(F(0.95;3,29)=\)</span> 2.93. We can thus reject the null hypothesis at the chosen significance level <span class="math inline">\(0.05\)</span>.</p>
+<p>Consider the quantity <span class="math inline">\(L=\mu_1-(\mu_2+\mu_3+\mu4)/3\)</span>. We can calculate that <span class="math inline">\(\hat{L}=\)</span> -15.22, and <span class="math inline">\(s^2(\hat{L})=\)</span> 4.65. Moreover, since <span class="math inline">\(t(1-0.01/2;n_T-r)=\)</span> 2.76 a <span class="math inline">\(99\%\)</span> confidence interval for <span class="math inline">\(L\)</span> is (-21.16, -9.27).</p>
+<p>To test the hypothesis <span class="math inline">\(H_0: L=0\)</span> against <span class="math inline">\(H_1: L \neq 0\)</span>. We can calculate the t-statistics <span class="math inline">\(t^*=\hat{L}/s(\hat{L})=\)</span> -7.06. We can calculate the quantile of the t-distribution as before to finish the test.</p>
+<p>Next we demonstrate how to contruct the simultaneous confidence intervals for all pairwise difference. The code will construct confidence intervals for two pairs, but leave you to finish the rest.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create vectors for the first two linear combinations </span>
+comb.mat&lt;-<span class="kw">matrix</span>(<span class="dv">0</span>,<span class="dt">nrow=</span><span class="dv">2</span>,<span class="dt">ncol=</span><span class="dv">4</span>)
+comb.mat[<span class="dv">1</span>,]=<span class="kw">c</span>(<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>);comb.mat[<span class="dv">2</span>,]=<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">0</span>);
+
+<span class="co"># Obtain the estimates </span>
+diff =<span class="st"> </span><span class="kw">numeric</span>(<span class="kw">dim</span>(comb.mat)[<span class="dv">1</span>]);
+diff.sd=diff;
+mean.tmp=anova.fit<span class="op">$</span>coefficients;mean.tmp[<span class="dv">1</span>]=<span class="dv">0</span>;
+ns=<span class="kw">as.numeric</span>(<span class="kw">table</span>(Spock<span class="op">$</span>Judge));
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(diff)){
+  diff[i]=<span class="kw">sum</span>(comb.mat[i,]<span class="op">*</span>mean.tmp);
+  diff.sd[i]=<span class="kw">sqrt</span>(<span class="kw">sum</span>(comb.mat[i,]<span class="op">^</span><span class="dv">2</span><span class="op">*</span>ns));
+}
+
+alpha=<span class="fl">0.05</span>;
+
+<span class="co"># Bonferroni correction:</span>
+m=<span class="dv">6</span>; <span class="co"># for all pairwise differences, although we only show two here</span>
+B.stat=<span class="kw">qt</span>(<span class="dv">1</span><span class="op">-</span>alpha<span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>m),anova.fit<span class="op">$</span>df.residual);
+
+<span class="co"># Tukey-Kramer </span>
+T.stat=<span class="kw">qtukey</span>(<span class="dv">1</span><span class="op">-</span>alpha, <span class="dt">nmeans=</span><span class="kw">length</span>(anova.fit<span class="op">$</span>coefficients), <span class="dt">df=</span>anova.fit<span class="op">$</span>df.residual)<span class="op">/</span><span class="kw">sqrt</span>(<span class="dv">2</span>);
+
+<span class="co"># Scheffe </span>
+S.stat=<span class="kw">sqrt</span>( (<span class="kw">length</span>(anova.fit<span class="op">$</span>coefficients)<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span><span class="kw">qf</span>(<span class="dv">1</span><span class="op">-</span>alpha,<span class="kw">length</span>(anova.fit<span class="op">$</span>coefficients)<span class="op">-</span><span class="dv">1</span>,anova.fit<span class="op">$</span>df.residual))
+
+table.stats=<span class="kw">matrix</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">3</span>);
+table.stats[<span class="dv">1</span>,]=<span class="kw">c</span>(B.stat,T.stat,S.stat);
+<span class="kw">colnames</span>(table.stats)=<span class="kw">c</span>(<span class="st">&#39;Bonferroni&#39;</span>, <span class="st">&#39;Tukey&#39;</span>, <span class="st">&#39;Scheffe&#39;</span>)
+table.stats</code></pre></div>
+<pre><code>##      Bonferroni Tukey Scheffe
+## [1,]        2.8   2.7       3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Then, we can construct the confidence intervals as, e.g.,</span>
+CI.bonferroni =<span class="kw">matrix</span>(<span class="dv">0</span>,<span class="dt">nrow=</span><span class="dv">2</span>,<span class="dt">ncol=</span><span class="dv">2</span>);
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(diff)){
+  CI.bonferroni[i,]=diff[i]<span class="op">+</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span>B.stat<span class="op">*</span>diff.sd[i];
+}</code></pre></div>
+</div>
+<div id="alternative-forms-of-the-anova-model" class="section level3">
+<h3><span class="header-section-number">2.2.4</span> Alternative forms of the ANOVA model</h3>
+<ul>
+<li>Factor-effect model</li>
+<li>Regression model</li>
+</ul>
+<p>The default of ANOVA in <code>R</code> set weights proportional to the sample size in each cell. You can supply the <code>weights</code> to the <code>aov()</code> function to force equal weights.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Weights proportional to sample sizes </span>
+<span class="kw">print</span>(<span class="kw">model.tables</span>(anova.fit,<span class="st">&quot;effects&quot;</span>))</code></pre></div>
+<pre><code>## Tables of effects
+## 
+##  Judge 
+##          1     2     3     4
+##     -10.72 8.271 3.755 1.455
+## rep   9.00 6.000 9.000 9.000</code></pre>
+</div>
+</div>
+<div id="model-diagnostics" class="section level2">
+<h2><span class="header-section-number">2.3</span> Model diagnostics</h2>
+<ul>
+<li>Possible departures</li>
+<li>Diagnostics with residuals</li>
+<li>Graphical methods</li>
+<li>Formal tests
+<ul>
+<li>Hartley test</li>
+<li>Bartlett test</li>
+<li>Levene test</li>
+</ul></li>
+<li>Remedial measures
+<ul>
+<li>Weighted least squares</li>
+<li>Nonparametric tests based on ranks: rank test, Kruskal-Wallis test</li>
+<li>Box-Cox transformation</li>
+</ul></li>
+</ul>
+<p>All diagnostics start with the residuals.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Obtain the residuals from the ANOVA fit</span>
+residuals=anova.fit<span class="op">$</span>residuals;
+<span class="kw">hist</span>(residuals)</code></pre></div>
+<p><img src="STA207_bookdown_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Semistudentized residuals</span>
+residuals.semistd=anova.fit<span class="op">$</span>residuals<span class="op">/</span><span class="kw">sqrt</span>(mse);
+<span class="kw">hist</span>(residuals.semistd)</code></pre></div>
+<p><img src="STA207_bookdown_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Studentized residuals </span>
+weights=<span class="dv">1</span><span class="op">-</span><span class="dv">1</span><span class="op">/</span>ns[<span class="kw">as.numeric</span>(Spock<span class="op">$</span>Judge)];
+residuals.std=anova.fit<span class="op">$</span>residuals<span class="op">/</span><span class="kw">sqrt</span>(mse)<span class="op">/</span><span class="kw">sqrt</span>(weights);
+<span class="kw">hist</span>(residuals.std)</code></pre></div>
+<p><img src="STA207_bookdown_files/figure-html/unnamed-chunk-6-3.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the residuals (or the other two versions) against fitted values </span>
+<span class="kw">plot</span>(residuals<span class="op">~</span>anova.fit<span class="op">$</span>fitted.values,<span class="dt">type=</span><span class="st">&#39;p&#39;</span>,<span class="dt">pch=</span><span class="dv">16</span>,<span class="dt">cex=</span><span class="fl">1.5</span>,<span class="dt">xlab=</span><span class="st">&quot;Fitted values&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Residuals&quot;</span>)</code></pre></div>
+<p><img src="STA207_bookdown_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the residual against certain orders</span>
+<span class="co"># No clear orders make sense in the Spock trial data </span>
+
+<span class="co"># Stem-leaf plot  (or use histogram, or qq-plot )</span>
+<span class="kw">stem</span>(residuals)</code></pre></div>
+<pre><code>## 
+##   The decimal point is at the |
+## 
+##   -10 | 3
+##    -8 | 21
+##    -6 | 61
+##    -4 | 977
+##    -2 | 3
+##    -0 | 66630941
+##     0 | 4649
+##     2 | 78014
+##     4 | 0771
+##     6 | 
+##     8 | 54
+##    10 | 
+##    12 | 0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qqnorm</span>(residuals);<span class="kw">qqline</span>(residuals)</code></pre></div>
+<p><img src="STA207_bookdown_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot residuals against missing variables </span>
+<span class="co"># Not applicable on Spock trial data </span></code></pre></div>
+<p>We now turn to formal tests of the equality of variances.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Calculate the variances for each group:</span>
+(<span class="dt">vars =</span> <span class="kw">tapply</span>(Spock<span class="op">$</span>perc.women,Spock<span class="op">$</span>Judge,var))</code></pre></div>
+<pre><code>##  1  2  3  4 
+## 25 43 21 36</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">alpha=<span class="fl">0.05</span>;
+
+<span class="co"># Hartley test:</span>
+H.stat=<span class="kw">max</span>(vars)<span class="op">/</span><span class="kw">min</span>(vars);
+<span class="kw">library</span>(SuppDists) <span class="co"># The distribution is in this package</span>
+<span class="co"># Both df and k only take integers:</span>
+<span class="kw">qmaxFratio</span>(<span class="dv">1</span><span class="op">-</span>alpha,<span class="dt">df=</span><span class="kw">floor</span>(<span class="kw">sum</span>(ns)<span class="op">/</span><span class="kw">length</span>(ns)<span class="op">-</span><span class="dv">1</span>),<span class="dt">k=</span><span class="kw">length</span>(ns))</code></pre></div>
+<pre><code>## [1] 8.4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qmaxFratio</span>(<span class="dv">1</span><span class="op">-</span>alpha,<span class="dt">df=</span><span class="kw">ceiling</span>(<span class="kw">sum</span>(ns)<span class="op">/</span><span class="kw">length</span>(ns)<span class="op">-</span><span class="dv">1</span>),<span class="dt">k=</span><span class="kw">length</span>(ns))</code></pre></div>
+<pre><code>## [1] 7.2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Bartlett test:</span>
+K.stat=<span class="st"> </span>(<span class="kw">sum</span>(ns)<span class="op">-</span><span class="kw">length</span>(ns))<span class="op">*</span><span class="kw">log</span>(mse)<span class="op">-</span><span class="kw">sum</span>( (ns<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span><span class="kw">log</span>(vars) );
+<span class="kw">qchisq</span>(<span class="dv">1</span><span class="op">-</span>alpha,<span class="dt">df=</span><span class="kw">length</span>(ns)<span class="op">-</span><span class="dv">1</span>)</code></pre></div>
+<pre><code>## [1] 7.8</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Levene test:</span>
+Spock<span class="op">$</span>res.abs=<span class="kw">abs</span>(anova.fit<span class="op">$</span>residuals);
+<span class="kw">summary</span>(<span class="kw">aov</span>(res.abs<span class="op">~</span>Judge,<span class="dt">data=</span>Spock))</code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Judge        3    5.6    1.88    0.17   0.91
+## Residuals   29  314.7   10.85</code></pre>
+<p>We leave weighted least squares for exercise. You can either calculate it following the steps discussed in lecture, or use the <code>weights</code> option in <code>lm()</code> and <code>aov()</code>.</p>
+<p>We can conduct the nonparametric tests as follows.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The rank test</span>
+Spock<span class="op">$</span>rank.perc=<span class="kw">rank</span>(Spock<span class="op">$</span>perc.women)
+<span class="kw">summary</span>(<span class="kw">aov</span>(rank.perc<span class="op">~</span>Judge,<span class="dt">data=</span>Spock))</code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value  Pr(&gt;F)    
+## Judge        3   1846     615    15.6 3.1e-06 ***
+## Residuals   29   1144      39                    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Krusal-Wallis test:</span>
+<span class="kw">kruskal.test</span>(perc.women<span class="op">~</span>Judge,<span class="dt">data=</span>Spock)</code></pre></div>
+<pre><code>## 
+##  Kruskal-Wallis rank sum test
+## 
+## data:  perc.women by Judge
+## Kruskal-Wallis chi-squared = 20, df = 3, p-value = 2e-04</code></pre>
+<p>For Box-Cox transformation, use the <code>boxcox</code> in library <code>MASS</code>.</p>
+</div>
+<div id="learning-objectives-1" class="section level2">
+<h2><span class="header-section-number">2.4</span> Learning Objectives</h2>
+<ul>
+<li>Students are able to write down a one-way ANOVA model given a new dataset.</li>
+<li>Students understand the basic properties of one-way ANOVA models.</li>
+<li>Students recognize the assumptions associated with each method.</li>
+<li>Students can implement the aforemened tasks in <code>R</code>.</li>
+<li>Students are comfortable reading <code>R</code> helpfiles related to one-way ANOVA.</li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ch-causal.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ch-anovaII.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["STA207_bookdown.pdf", "STA207_bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
