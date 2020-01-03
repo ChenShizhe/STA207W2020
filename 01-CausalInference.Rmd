@@ -9,7 +9,6 @@ output:
 
 ## Association and Causality
 
-Discussion 
 
 ## Potential Outcomes
 
