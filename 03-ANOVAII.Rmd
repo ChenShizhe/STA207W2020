@@ -1,0 +1,171 @@
+---
+output:
+  bookdown::gitbook:
+  pdf_document: default
+  html_document: default
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
+library(tidyr) 
+library(dplyr)
+library(qwraps2)
+options(digits=2)
+```
+
+
+# Two-way ANOVA {#ch:anovaII}
+
+
+## Experiments with two (or more) factors
+
+
+* Randomized experiments with two treatments 
+* Stratified randomized Experiments (also known as randomized block design)
+    - Auditor training data 
+    - Project STAR
+* Reasons for stratification: practical and statistical 
+* Sampling scheme for a stratified randomized experiment
+* Question of interest, null hypotheses, and their causal interpretation. 
+* Intuition of hypothesis testing.
+
+
+Description of the auditor training data: There are three training
+methods for the auditors and the response $Y$ is a proficiency score after the training are completed. Ideally we would like to compare the three methods among those who are as similar as possible in their educational background. How do we achieve this? One way is compare the three different training methods among those whose time since graduation from college are about the same. Suppose then we have ten such groups (of three individuals each). Group 1 consists of those who graduated recently, group 2 people graduated between one and two years ago, and group 10 consists of those who graduated some time in the past (say, ten years or more). Time since graduation is called the block (or a blocking factor) and treatment is the training method.
+
+## Two-way ANOVA
+
+
+### A motivating example: Hey fever relief data set
+
+For the Hay Fever Relief example, 9 compounds for Hay Fever Relief are made by varying levels of the two basic ingredients. Ingredient 1 (factor A) has $a = 3$ levels: low $(i = 1)$, medium $(i = 2)$ and high $(i = 3)$. Similarly, ingredient 2 (factor B) has $b = 3$ levels: low $(j = 1)$,
+medium $(j = 2)$ and high $(j = 3)$. A total of 36 subjects (suffering from hay fever) are selected and each of the 9 compounds are given to randomly selected $n = 4$ individuals.
+
+### A two-way ANOVA model 
+
+
+* Cell mean model 
+* Decomposition of the means, and their estimators
+* Additive models 
+    - Why additive models?
+    - Estimators of the means 
+* Decomposition of sum of squares, and their properties 
+
+
+
+### Statistical inference
+
+* F-statistics based on sums of squares 
+* Hypothesis testing
+    - Test for interaction effects
+    - Test for main effects
+    - Alternative test if interaction can be ignored (additive models)
+* (Simultaneous) confidence intervals with and without interactions 
+    - Bonferroni
+    - Tukey
+    - Scheffe 
+  
+### Model diagnostics
+
+* Similar to those for one-way ANOVA 
+
+
+### Strategy for data analysis 
+
+Using the Hey Fever data as an example. 
+
+
+```{r fig-anovaII, fig.cap='Box plot with jittered data points for the Spock trial data.', out.width='80%', fig.asp=.75, fig.align='center', cache = TRUE}
+Hay <- read.csv(file="./data/HayFever.csv", header=TRUE, sep=",")
+
+# Use a slightly different visualization:
+pairs(Hay,pch=16,col='red',cex=1.5)
+
+# Or draw the interaction plot:
+interaction.plot(Hay$Ingredient.1, Hay$Ingredient.2, Hay$Relief)
+```
+
+Step 1. Test whether interaction effects are presented. 
+
+```{r}
+# We can use the regression form here
+full_model=lm(Relief~as.factor(Ingredient.1)+as.factor(Ingredient.2)+as.factor(Ingredient.1)*as.factor(Ingredient.2),data=Hay);
+reduced_model=lm(Relief~as.factor(Ingredient.1)+as.factor(Ingredient.2),data=Hay);
+anova(reduced_model,full_model)
+
+```
+
+The test result show that interaction effects are very likely to be absent from this data set. This means that we need to treat each combination as a unit, whereas we can compare each type of main effects separately. In the Hay Fever data, we naturally want to the find the combination of ingredients that is most effective. We can use the Tukey-Kramer method for this task.
+
+```{r}
+library(stats)
+alpha=0.05;
+anova.fit<-aov(Relief~as.factor(Ingredient.1)+as.factor(Ingredient.2)+as.factor(Ingredient.1)*as.factor(Ingredient.2),data=Hay)
+T.ci=TukeyHSD(anova.fit,conf.level = 1-alpha)
+plot(T.ci, las=1 , col="brown")
+
+# We only need to pay attention to the differences of the two largest means
+idx=list();
+idx[[1]]=Hay$Ingredient.1;idx[[2]]=Hay$Ingredient.2;
+(means.comb=tapply( Hay$Relief, INDEX=idx,mean))
+
+```
+
+```{r}
+# For model diagnostics, we can use the default plotting function of aov()
+
+plot(anova.fit)
+```
+
+### Special case: one observation per cell
+
+* Interaction effects are no longer identifiable
+* Estimation and testing 
+  - Tukey's test of additivity
+
+
+### Unbalanced two-way ANOVA
+
+* The model is the same as for the balanced case
+* Estimators for the means and variances
+* Hypothesis testing
+    - Interaction effects
+    - Main effects
+* Missing data in the one observation per cell case 
+
+### Analysis of stratified experiments
+
+* Why stratification?
+
+We can check whether stratification is efficient on the auditor training data. 
+
+```{r} 
+Audit <- read.csv(file="./data/AuditorTraining.csv", header=TRUE, sep=",")
+
+# Or draw the interaction plot:
+interaction.plot(Audit$Block, Audit$Method,Audit$Proficiency)
+
+```
+
+```{r}
+# Fit the model with blocks:
+anova.block<-aov(Proficiency~as.factor(Block)+as.factor(Method),data=Audit)
+anova.random<-aov(Proficiency~as.factor(Method),data=Audit)
+
+mse.block<-sum(anova.block$residuals^2)/anova.block$df.residual
+mse.random<-sum(anova.random$residuals^2)/anova.random$df.residual
+(E=mse.random/mse.block)
+```
+
+
+## Learning Objectives
+
+* Students are able to write down an appropriate two-way ANOVA model given a new dataset.
+* Students understand the basic properties of the various types of two-way ANOVA models. 
+* Students recognize the assumptions associated with each method, and can find appropriate tests to verify the assumptions. 
+* Students can implement the aforemened tasks in `R`.
+* Students can seek help in coding using the Internet. 
+
+
+
+

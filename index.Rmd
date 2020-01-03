@@ -1,0 +1,29 @@
+---
+title: "Statistical Methods for Research II"
+author: "Shizhe Chen"
+date: "`r Sys.Date()`"
+knit: "bookdown::render_book"
+bibliography: [book.bib, packages.bib]
+biblio-style: "apalike"
+documentclass: book
+link-citations: yes
+description: "This file contains code and lecture notes for STA 207"
+always_allow_html: yes
+site: bookdown::bookdown_site
+fontsize: 12pt
+output: 
+  bookdown::gitbook:
+    pdf_document: default
+    html_document: default
+---
+
+# Preface {-#pre}
+
+This file contains code and comments in STA 207. Note that this document containss only the outline of the in-class discussion, except for data analysis. Many materials in this document are adapted based on lectures by Professors Prabir Burman, Peng Ding, and Kosuke Imai.
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```

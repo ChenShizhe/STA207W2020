@@ -1,0 +1,33 @@
+---
+output:
+  bookdown::gitbook:
+  pdf_document: default
+  html_document: default
+---
+
+# Causal Inference {#ch:causal}
+
+## Association and Causality
+
+Discussion 
+
+## Potential Outcomes
+
+* Definition of potential outcomes 
+* Properties of potential outcomes 
+* Key assumptions in this notation
+* Immutable characteristics
+
+
+## Experiments v.s. Observational Studies
+
+* Advantages of randomized experiments
+* Reasons for observational studies 
+
+
+## Learning Objectives
+
+* Students are able to distinguish association and causality.
+* Students gain basic familiarity to the potential outcome framework.
+* Students are able to recognize the importance of experiment designs.
+
