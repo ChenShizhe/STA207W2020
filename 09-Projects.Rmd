@@ -19,7 +19,7 @@ options(digits=2)
 
 If a statistical method is employed, you need to clearly state the model and justify your choice. 
 
-## Project 1
+## Project 1: Project STAR I
 
 ### Background
 
@@ -44,7 +44,7 @@ The dataset contains scaled scores for math and reading from kindergarten to 3rd
 
 
 
-## Project 2
+## Project 2: Project STAR II
 
 ### Background
 
@@ -64,7 +64,7 @@ We will continue our study on Project STAR. In the previous project, we examine 
 
 
 
-## Project 3
+## Project 3: US Traffic Fatalities
 
 ### Background
 
@@ -99,9 +99,7 @@ Total vehicle miles traveled annually by state was obtained from the Department 
 5.  Consider the full dataset from 1982 to 1988, conduct Tasks 2 and 3. 
 6.  Are there any notable differences between your analysis in Task 2 and Task 5? If so, explain these differences. 
 
-## Project 4
-
-
+## Project 4: Bank Marketing
 
 ### Background
 
