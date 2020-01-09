@@ -33,13 +33,14 @@ The dataset contains scaled scores for math and reading from kindergarten to 3rd
 
 ### Tasks 
 
+
 1.  Install the `AER` package and load the `STAR` dataset.  
 2.  Explore this dataset and generate summary statistics (in forms of tables or plots) that you find informative, and explain them.  
-3.  Write down a one-way ANOVA model to study the effects of class types on scores. Explain your notation. 
+3.  Write down a one-way ANOVA model to study the effects of class types on the math scaled scores. Explain your notation. 
 4.  Explain why your model is appropriate for this task on this data set. You may want to include statistics and plots in your explanation. 
 5.  Fit the model you choose in Task 3 and show your fits in the report. 
 6.  Conduct model diagnostic and/or sensitivity analysis. 
-7.  Test whether there is a difference in the math scaled score in kindergarten across students in different class types. Justify your choice of test. 
+7.  Test whether there is a difference in the math scaled score in 1st grade  across students in different class types. Justify your choice of test. 
 8.  Discuss whether you are able to make any causal statements based on your analysis. 
 
 
