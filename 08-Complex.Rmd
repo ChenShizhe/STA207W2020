@@ -18,3 +18,34 @@ options(digits=2)
 
 (Optional topic)
 
+
+## Data in the big data era
+
+
+
+
+## Useful methods 
+
+
+### Penalized regression 
+
+* Motivation
+* Loss function
+* Ridge ($\ell_2$-penalty)
+* Lasso ($\ell_1$-penalty)
+* Other penalties 
+
+
+### Model selection
+
+* Motivation
+* Stepwise selection
+* Cross-validation
+
+### Other
+
+* Dimension reduction
+* False discovery rate 
+* Nonparametric models 
+
+

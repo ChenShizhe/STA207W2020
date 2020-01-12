@@ -17,3 +17,42 @@ options(digits=2)
 # Observational Study {#ch:obs}
 
 (Optional topic)
+
+
+
+## Causality in observational studies 
+
+* Features of observational studies 
+* Selection bias 
+
+## Analysis with no latent confouding 
+
+* Assumptions 
+    - I.I.D.
+    - Ignorability 
+    - Overlap 
+    
+* Estimation
+    - Stratification
+    - Outcome regression
+
+* Propensity score
+    - Definition and key properties 
+    - Propensity scores: matching
+    - Propensity scores: weighting 
+    - Doubly-robust regression 
+    
+* Covariance balancing 
+
+##  Instrumental variable 
+
+* Definition and assumptions 
+* Key properties of IV
+* Estimation 
+
+
+## Missing data
+
+* Missing mechanisms 
+* Multiple imputation
+
