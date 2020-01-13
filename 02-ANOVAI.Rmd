@@ -77,7 +77,7 @@ $MSE=$ `r (mse=sum(anova.fit$residuals^2)/anova.fit$df.residual)`.
 	-  Hypothesis testing
 * (Simultaneous) confidence intervals 
 
-To test the null hypothesis $H_0: \mu_1=\mu_2=\mu_3=\mu_4$ against the alternative $H_1:$ not all $\mu_i$'s are equal. We can calculate the F-statistics $F^*=\frac{MSTR}{MSE}=$ `r F.stat=(mstr/mse)`, $F(0.95;3,29)=$ `r qf(0.95,dim(Spock)[1]-1-anova.fit$df.residual,anova.fit$df.residual)`.
+To test the null hypothesis $H_0: \mu_1=\mu_2=\mu_3=\mu_4$ against the alternative $H_1:$ not all $\mu_i$'s are equal. We can calculate the F-statistics $F^*=\frac{MSTR}{MSE}=$ $`r (F.stat=(mstr/mse))`$, when $F(0.95;3,29)=$ `r qf(0.95,dim(Spock)[1]-1-anova.fit$df.residual,anova.fit$df.residual)`.
 We can thus reject the null hypothesis at the chosen significance level $0.05$. 
 
 
@@ -100,7 +100,7 @@ mean.tmp=anova.fit$coefficients;mean.tmp[1]=0;
 ns=as.numeric(table(Spock$Judge));
 for(i in 1:length(diff)){
   diff[i]=sum(comb.mat[i,]*mean.tmp);
-  diff.sd[i]=sqrt(sum(comb.mat[i,]^2*ns));
+  diff.sd[i]=sqrt(sum(comb.mat[i,]^2/ns)*mse);
 }
 
 alpha=0.05;

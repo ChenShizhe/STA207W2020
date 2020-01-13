@@ -125,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2020-01-11}
+    \date{2020-01-12}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -326,9 +326,9 @@ We can obtain the following.
 
 To test the null hypothesis \(H_0: \mu_1=\mu_2=\mu_3=\mu_4\) against the
 alternative \(H_1:\) not all \(\mu_i\)'s are equal. We can calculate the
-F-statistics \(F^*=\frac{MSTR}{MSE}=\) , \(F(0.95;3,29)=\) 2.93. We can
-thus reject the null hypothesis at the chosen significance level
-\(0.05\).
+F-statistics \(F^*=\frac{MSTR}{MSE}=\) \(17.61\), when \(F(0.95;3,29)=\)
+2.93. We can thus reject the null hypothesis at the chosen significance
+level \(0.05\).
 
 Consider the quantity \(L=\mu_1-(\mu_2+\mu_3+\mu4)/3\). We can calculate
 that \(\hat{L}=\) -15.22, and \(s^2(\hat{L})=\) 4.65. Moreover, since
@@ -357,7 +357,7 @@ confidence intervals for two pairs, but leave you to finish the rest.
 \NormalTok{ns=}\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{table}\NormalTok{(Spock}\OperatorTok{$}\NormalTok{Judge));}
 \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(diff))\{}
 \NormalTok{  diff[i]=}\KeywordTok{sum}\NormalTok{(comb.mat[i,]}\OperatorTok{*}\NormalTok{mean.tmp);}
-\NormalTok{  diff.sd[i]=}\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{sum}\NormalTok{(comb.mat[i,]}\OperatorTok{^}\DecValTok{2}\OperatorTok{*}\NormalTok{ns));}
+\NormalTok{  diff.sd[i]=}\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{sum}\NormalTok{(comb.mat[i,]}\OperatorTok{^}\DecValTok{2}\OperatorTok{/}\NormalTok{ns)}\OperatorTok{*}\NormalTok{mse);}
 \NormalTok{\}}
 
 \NormalTok{alpha=}\FloatTok{0.05}\NormalTok{;}

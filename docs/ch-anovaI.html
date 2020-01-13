@@ -24,7 +24,7 @@
 <meta name="author" content="Shizhe Chen" />
 
 
-<meta name="date" content="2020-01-11" />
+<meta name="date" content="2020-01-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -280,7 +280,7 @@ Figure 2.1: Box plot with jittered data points for the Spock trial data.
 </ul></li>
 <li>(Simultaneous) confidence intervals</li>
 </ul>
-<p>To test the null hypothesis <span class="math inline">\(H_0: \mu_1=\mu_2=\mu_3=\mu_4\)</span> against the alternative <span class="math inline">\(H_1:\)</span> not all <span class="math inline">\(\mu_i\)</span>’s are equal. We can calculate the F-statistics <span class="math inline">\(F^*=\frac{MSTR}{MSE}=\)</span> , <span class="math inline">\(F(0.95;3,29)=\)</span> 2.93. We can thus reject the null hypothesis at the chosen significance level <span class="math inline">\(0.05\)</span>.</p>
+<p>To test the null hypothesis <span class="math inline">\(H_0: \mu_1=\mu_2=\mu_3=\mu_4\)</span> against the alternative <span class="math inline">\(H_1:\)</span> not all <span class="math inline">\(\mu_i\)</span>’s are equal. We can calculate the F-statistics <span class="math inline">\(F^*=\frac{MSTR}{MSE}=\)</span> <span class="math inline">\(17.61\)</span>, when <span class="math inline">\(F(0.95;3,29)=\)</span> 2.93. We can thus reject the null hypothesis at the chosen significance level <span class="math inline">\(0.05\)</span>.</p>
 <p>Consider the quantity <span class="math inline">\(L=\mu_1-(\mu_2+\mu_3+\mu4)/3\)</span>. We can calculate that <span class="math inline">\(\hat{L}=\)</span> -15.22, and <span class="math inline">\(s^2(\hat{L})=\)</span> 4.65. Moreover, since <span class="math inline">\(t(1-0.01/2;n_T-r)=\)</span> 2.76 a <span class="math inline">\(99\%\)</span> confidence interval for <span class="math inline">\(L\)</span> is (-21.16, -9.27).</p>
 <p>To test the hypothesis <span class="math inline">\(H_0: L=0\)</span> against <span class="math inline">\(H_1: L \neq 0\)</span>. We can calculate the t-statistics <span class="math inline">\(t^*=\hat{L}/s(\hat{L})=\)</span> -7.06. We can calculate the quantile of the t-distribution as before to finish the test.</p>
 <p>Next we demonstrate how to contruct the simultaneous confidence intervals for all pairwise difference. The code will construct confidence intervals for two pairs, but leave you to finish the rest.</p>
@@ -295,7 +295,7 @@ mean.tmp=anova.fit<span class="op">$</span>coefficients;mean.tmp[<span class="dv
 ns=<span class="kw">as.numeric</span>(<span class="kw">table</span>(Spock<span class="op">$</span>Judge));
 <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(diff)){
   diff[i]=<span class="kw">sum</span>(comb.mat[i,]<span class="op">*</span>mean.tmp);
-  diff.sd[i]=<span class="kw">sqrt</span>(<span class="kw">sum</span>(comb.mat[i,]<span class="op">^</span><span class="dv">2</span><span class="op">*</span>ns));
+  diff.sd[i]=<span class="kw">sqrt</span>(<span class="kw">sum</span>(comb.mat[i,]<span class="op">^</span><span class="dv">2</span><span class="op">/</span>ns)<span class="op">*</span>mse);
 }
 
 alpha=<span class="fl">0.05</span>;
