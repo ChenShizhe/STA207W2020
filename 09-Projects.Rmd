@@ -47,36 +47,46 @@ The dataset contains scaled scores for math and reading from kindergarten to 3rd
 
 ## Project 2: Project STAR II
 
-### Background
+## Background
 
-We will continue our study on Project STAR. In the previous project, we examine the effects on individual students. Here we consider each teacher as the individual unit. Moreover, we will also explore the longitudinal feature of this dataset and the fact that randomization happened within schools.
+We will continue our study on Project STAR. In the previous project, we examine the effects on individual students. Here we consider each teacher as the individual unit. Moreover, we will also explore the longitudinal feature of this dataset and the fact that randomization happened within schools. 
 
 
-### Tasks
+## Tasks 
 
-1.  Explore math scaled scores in the 1st and 2nd grades with teachers as the unit.  Generate summary statistics (in forms of tables or plots) that you find informative, and explain them.
-2.  Write down a two-way ANOVA model to study the effects of class types on scores, with the school indicator as the other factor. Explain your notation.
-3.  Explain why your model is appropriate for this task on this data set. You may want to include statistics and plots in your explanation.
-4.  Fit the model you choose in Task 2 and show your fits in the report.
-5.  Conduct model diagnostic and/or sensitivity analysis.
-6.  Test whether there is a difference in the math scaled score in kindergarten across students in different class types. Justify your choice of test.
-7.  Discuss whether you are able to make any causal statements based on your analysis.
-8.  Is there any difference between the results from this analysis compared to the analysis from Project 1?
+1.  Explore math scaled scores in the 1st with teachers as the unit. Generate summary statistics (in forms of tables or plots) that you find informative, and explain them. 
+
+2.  Write down a two-way ANOVA model to study the effects of class types on math scaled scores in 1st grade, with the school indicator as the other factor. Explain your notation. 
+
+3.  Explain why your model is appropriate for this task on this data set. You may want to include statistics and plots in your explanation. 
+
+4.  Fit the model you choose in Task 2 and show your fits in the report. 
+
+5.  Conduct model diagnostic and/or sensitivity analysis. 
+
+6.  Test whether there is a difference in math scaled score in 1st grade across teachers in different class types. Justify your choice of test. 
+
+7.  Discuss whether you are able to make any causal statements based on your analysis. 
+
+8.  Is there any difference between the results from Project 2 compared to the results from Project 1?
+
+
+In any of these tasks, if a statistical method is employed, you need to clearly state the model and justify your choice. 
 
 
 
 ## Project 3: US Traffic Fatalities
 
-### Background
+## Background
 
 
-The National Highway Traffic Safety Administration reported that there are 36,560  highway fatalities across US in 2018 ([link](nhtsa.gov/press-releases/roadway-fatalities-2018-fars)).
-Alarmed by the high traffic fatalities, you wanted to use your knowledge and skills in statistics to explore measures that can potentially reduce the traffic fatalities.
+The National Highway Traffic Safety Administration reported that there are 36,560  highway fatalities across US in 2018 ([link](nhtsa.gov/press-releases/roadway-fatalities-2018-fars)). 
+Alarmed by the high traffic fatalities, you wanted to use your knowledge and skills in statistics to explore measures that can potentially reduce the traffic fatalities. 
 
 You found out that traffic fatalities data for 48 US states from 1982 to 1988 are available, and well-cleaned, in an `R` package `AER`. You can see more description of the data set from the help file of the `fatalities` dataset (e.g., using `?Fatalities`).
 
 
-You want to analyze this dataset to see if there are any of the variables that *caused* the reduction or increase of traffic fatalities. Note that the ultimate goal is to make suggestions to policy makers to take certain measures.
+You want to analyze this dataset to see if there are any of the variables that *caused* the reduction or increase of traffic fatalities. Note that the ultimate goal is to make suggestions to policy makers to take certain measures. 
 
 
 The beer tax is the tax on a case of beer, which is an available measure of state alcohol taxes more generally. The drinking age variable is a factor indicating whether the legal drinking age is 18, 19, or 20. The two binary punishment variables describe the state's minimum sentencing requirements for an initial drunk driving conviction.
@@ -86,39 +96,58 @@ Total vehicle miles traveled annually by state was obtained from the Department 
 
 
 
-### Tasks
+## Tasks 
 
-1.  Explore this dataset and generate summary statistics (in forms of tables or plots) that you find crucial for your own interest, or for convincing the policy makers.
-2.  Consider only the data in year 1982, propose a regression model to study whether having a mandatory jail sentence reduce the traffic fatalities. In particular, you need to
-    a.  define the causal effect,
-    b.  state the assumptions required,
-    c,  write down your model,
-    d,  fit the model with appropriate methods,
-    e,  and conduct model diagnostics and/or sensitivity analysis.
-3.  Conclude your analysis results, and interpret them. You may want to test a hypothesis, construct a confidence interval, or draw a confidence band.
-4.  Explain your analysis results to policy makers who may know little about statistics.
-5.  Consider the full dataset from 1982 to 1988, conduct Tasks 2 and 3.
-6.  Are there any notable differences between your analysis in Task 2 and Task 5? If so, explain these differences.
+1.  Explore this dataset and generate summary statistics (in forms of tables or plots) that you find crucial for your own interest, or for convincing the policy makers. 
+
+2.  Consider only the the full dataset from 1982 to 1988, propose a regression model to study whether having a mandatory jail sentence is associated with reduced traffic fatalities. In particular, you need to 
+    a.  write down your model,
+    b.  state the assumptions required, 
+    d.  fit the model with appropriate methods,
+    e.  conduct model diagnostics and/or sensitivity analysis. 
+    f.  and discuss causal interpretation of the proposed models. 
+    
+3.  Conclude your analysis results. You may want to test a hypothesis, construct a confidence interval, or draw a confidence band. 
+
+4.  Explain the implications of your results to policy makers who know little about statistics. Make suggestions if you want to. 
+
+## Hints
+
+1.  Take a look at the helpfile for this data set. 
+2.  You may want to think about the causal interprettion (2.f) before finding an appropriate model (2.a).
+3.  Some key words here: longitudinal data, time-series data, propensity score, matching, instrument variable, and observational study. Not all key words lead to useful resources. 
+4.  You may use additional data or studies to strengthen your argument in Task 4. 
+
+
 
 ## Project 4: Bank Marketing
 
-### Background
+## Background
 
-A Portuguese retail bank started a telemarketing campaign in 2008, aiming to subscribe new users to a long-term deposit. Information collected during the campaign was recorded in this data set. More information is available on the UCI machine learning repository  ([link](https://archive.ics.uci.edu/ml/datasets/Bank+Marketing#)) and the citations therein.
+A Portuguese retail bank started a telemarketing campaign in 2008, aiming to subscribe new users to a long-term deposit. Information collected during the campaign was recorded in this data set. More information is available on the UCI machine learning repository  ([link](https://archive.ics.uci.edu/ml/datasets/Bank+Marketing#)) and the citations therein. 
 
-You are a consultant who is hired to study the retail banking market in Portugese. Somehow you come to know such a dataset is publicly available. Naturally, you want to gain some insights of the market from this dataset, before conducting an expensive survey.
+You are a consultant who is hired to study the retail banking market in Portugese. Somehow you come to know such a dataset is publicly available. Naturally, you want to gain some insights of the market from this dataset, before conducting an expensive survey. 
 
-### Tasks
+## Tasks 
 
-1.  Acquire the dataset from the UCI machine learning repository ([link](https://archive.ics.uci.edu/ml/datasets/Bank+Marketing#)).
-2.  Pick an appropriate data set to study, and justify your decision.
-3.  Explore this dataset and generate summary statistics (in forms of tables or plots) that you find crucial for your clients to know.
+1.  Acquire the dataset from the UCI machine learning repository ([link](https://archive.ics.uci.edu/ml/datasets/Bank+Marketing#)). 
+2.  Pick an appropriate data set to study, and justify your decision. 
+3.  Explore this dataset and generate summary statistics (in forms of tables or plots) that you find crucial for your clients to know. 
 4.  Build a predictive model for whether a client will sign on to a long-term deposit. You will use logistic regression in this task. Specifically, you will
-    a.  write down a property logistic regression model,
+    a.  write down a proper logistic regression model,
     b.  fit the model,
     c.  evaluate the performance of the fitted model,
-    d.  and conduct model diagnostic and/or sensitivity analysis.
-5.  Build another predictive model using random forest, and compare its performance compared to the logistic regression.
-6.  Explain the possible gap in the performances to your supervisor, who knows statistics quite well and only believes in data and mathematics.  
-7.  Test whether having a house loan will increase the likelihood of a client to sign up for a long-term deposit. (Hint: you don't need to use the same model as in Task 4.)
-8.  Explain your conclusion from the test to your clients who know little about statistics.
+    d.  and conduct model diagnostic and/or sensitivity analysis. 
+5.  Build another predictive model using a method of your choice, and compare its performance to the logistic regression.
+6.  Explain the gap in the performances, if any, to your supervisor, who knows statistics quite well and only believes in data and mathematics.  
+
+In any of these tasks, if a statistical method is employed, you need to clearly state the model and justify your choice. 
+
+## Hints
+
+1.  Pay close attention to the dataset (Task 3) before building your prediction model.
+2.  You may use random forest in Task 5 if you have no other methods in mind. 
+3.  You need to evaluate performance of each method in a statistically appropriate manner. 
+4.  You may use methods built in other computing language and display the results in your report. Your code in other language should be made available for reproducibility. 
+
+

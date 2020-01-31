@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
 library(tidyr) 
 library(dplyr)
 library(qwraps2)
+library(gplots)
 options(digits=2)
 ```
 
@@ -30,8 +31,133 @@ options(digits=2)
 * Intuition of hypothesis testing.
 
 
+
+**Auditor training**
+
+We can check whether stratification is efficient on the auditor training data. 
+
+
 Description of the auditor training data: There are three training
 methods for the auditors and the response $Y$ is a proficiency score after the training are completed. Ideally we would like to compare the three methods among those who are as similar as possible in their educational background. How do we achieve this? One way is compare the three different training methods among those whose time since graduation from college are about the same. Suppose then we have ten such groups (of three individuals each). Group 1 consists of those who graduated recently, group 2 people graduated between one and two years ago, and group 10 consists of those who graduated some time in the past (say, ten years or more). Time since graduation is called the block (or a blocking factor) and treatment is the training method.
+
+```{r} 
+Audit <- read.csv(file="./data/AuditorTraining.csv", header=TRUE, sep=",")
+
+# Draw the interaction plot:
+interaction.plot(Audit$Block, Audit$Method,Audit$Proficiency)
+
+```
+
+```{r}
+# Fit the model with blocks:
+anova.block<-aov(Proficiency~as.factor(Block)+as.factor(Method),data=Audit)
+anova.random<-aov(Proficiency~as.factor(Method),data=Audit)
+
+mse.block<-sum(anova.block$residuals^2)/anova.block$df.residual
+mse.random<-sum(anova.random$residuals^2)/anova.random$df.residual
+(E=mse.random/mse.block)
+```
+
+
+**Simulation**
+
+We can also explore the properties of blocking using simulation. 
+
+```{r,echo=TRUE}
+# A simple simulation for stratification 
+set.seed(10928)
+# Data generating mechanism: 
+n=40;n.strata=10;
+X= sample(x=(1:n.strata),size=n,replace=TRUE);
+ACE=4; coef.X=2; 
+Y.1=ACE+coef.X*X+rnorm(n,mean=0,sd=1); # potential outcome
+Y.0=coef.X*X+rnorm(n,mean=0,sd=1); # potential outcome 
+trt= sample(1:n,size=(n/2),replace=FALSE);Z=rep(0,n);Z[trt]=1; # randomization
+
+Z.s=rep(0,n);
+for (i in 1:n.strata){# randomization within stratum 
+  id.stratum= which(X==i);
+  trt= sample(id.stratum,size=floor(length(id.stratum)/2),replace=FALSE);
+  Z.s[trt]=1; 
+}
+
+Y=Y.1*Z+Y.0*(1-Z); # observation w/o stratification 
+Y.s=Y.1*Z.s+Y.0*(1-Z.s); # observation w stratification 
+
+```
+
+
+```{r fig-nostrat, fig.cap='Estimation of ACE with and without adjusting for X', out.width='80%', fig.asp=.75, fig.align='center', cache = TRUE}
+# Analysis, w/o stratification 
+
+lm.vanilla=summary(lm(Y~Z));
+lm.X=summary(lm(Y~Z+X));
+
+plot(y=Y,x=X,pch=16,col=c('red','blue')[Z+1])
+legend(x=1.1,y=22,legend=c('Trt','Ctrl'),col=c('red','blue'),pch=16)
+text(x=5.1,y=5,labels=paste('Without X, Est. ACE = ',round(lm.vanilla$coef[2,1],2), 'with s.e.', round(lm.vanilla$coef[2,2],2),sep=' '  ),pos=4  )
+
+text(x=5.1,y=2,labels=paste('With X,  Est. ACE = ',round(lm.X$coef[2,1],2), 'with s.e.', round(lm.X$coef[2,2],2),sep=' '  ),pos=4  )
+```
+
+
+```{r fig-strat, fig.cap='Estimation of ACE with and without adjusting for X under stratified randomization', out.width='80%', fig.asp=.75, fig.align='center', cache = TRUE}
+# Analysis, w/o stratification 
+
+lm.simple=summary(lm(Y.s~Z.s));
+lm.strat=summary(lm(Y.s~Z.s+X));
+
+plot(y=Y.s,x=X,pch=16,col=c('red','blue')[Z+1])
+legend(x=1.1,y=22,legend=c('Trt','Ctrl'),col=c('red','blue'),pch=16)
+text(x=5.1,y=5,labels=paste('Without X, Est. ACE = ',round(lm.simple$coef[2,1],2), 'with s.e.', round(lm.simple$coef[2,2],2),sep=' '  ),pos=4  )
+
+text(x=5.1,y=2,labels=paste('With X,  Est. ACE = ',round(lm.strat$coef[2,1],2), 'with s.e.', round(lm.strat$coef[2,2],2),sep=' '  ),pos=4  )
+```
+```{r,cache=TRUE}
+# Repeat the above procedure 10000 times to evaluate the efficiency 
+
+# Wrap up the code in one function 
+
+strat.sim<-function(ACE){ 
+n=40;n.strata=10;
+X= sample(x=(1:n.strata),size=n,replace=TRUE);
+ coef.X=5; 
+Y.1=ACE+coef.X*X+rnorm(n,mean=0,sd=1); # potential outcome
+Y.0=coef.X*X+rnorm(n,mean=0,sd=1); # potential outcome 
+trt= sample(1:n,size=(n/2),replace=FALSE);Z=rep(0,n);Z[trt]=1; # randomization
+
+Z.s=rep(0,n);
+for (i in 1:n.strata){# randomization within stratum 
+  id.stratum= which(X==i);
+  trt= sample(id.stratum,size=floor(length(id.stratum)/2),replace=FALSE);
+  Z.s[trt]=1; 
+}
+
+Y=Y.1*Z+Y.0*(1-Z); # observation w/o stratification 
+Y.s=Y.1*Z.s+Y.0*(1-Z.s); # observation w stratification 
+
+
+lm.vanilla=summary(lm(Y~Z));
+lm.X=summary(lm(Y~Z+X));
+
+lm.simple=summary(lm(Y.s~Z.s));
+lm.strat=summary(lm(Y.s~Z.s+X));
+
+est.ACE=c(lm.vanilla$coef[2,1],lm.X$coef[2,1],lm.simple$coef[2,1],lm.strat$coef[2,1])
+return(est.ACE)
+}
+ACE=4;
+
+sim.result=replicate(n=1e4,strat.sim(ACE=ACE));
+```
+```{r}
+(mse=apply(sim.result-ACE,MARGIN=1,sd))
+```
+
+Q: Why conducting stratify randomization given the simulation results? 
+
+
+For more discussion, see Chapters 6 and 8 in [ANOVA: A Short Intro Using R](https://stat.ethz.ch/~meier/teaching/anova/) by Lukas Meier. 
 
 ## Two-way ANOVA
 
@@ -75,13 +201,31 @@ medium $(j = 2)$ and high $(j = 3)$. A total of 36 subjects (suffering from hay 
 Using the Hey Fever data as an example. 
 
 
-```{r fig-anovaII, fig.cap='Box plot with jittered data points for the Spock trial data.', out.width='80%', fig.asp=.75, fig.align='center', cache = TRUE}
+Step 0. Exploratory data analysis.
+
+```{r fig-anovaII, fig.cap='Box plot with jittered data points for the Hay Fever data.', out.width='80%', fig.asp=.75, fig.align='center', cache = TRUE}
 Hay <- read.csv(file="./data/HayFever.csv", header=TRUE, sep=",")
 
 # Use a slightly different visualization:
 pairs(Hay,pch=16,col='red',cex=1.5)
 
-# Or draw the interaction plot:
+```
+
+```{r fig-anovaII-m1, fig.cap='Main effect plot for ingredient 1', out.width='80%', fig.asp=.75, fig.align='center', cache = TRUE}
+# Or draw the main effect plots 
+plotmeans(Relief~Ingredient.1,data=Hay,xlab="Ingredient 1",ylab="Relief", main="Main  effect, Ingredient 1") 
+
+```
+
+
+```{r fig-anovaII-m2, fig.cap='Main effect plot for ingredient 2', out.width='80%', fig.asp=.75, fig.align='center', cache = TRUE}
+plotmeans(Relief~Ingredient.2,data=Hay,xlab="Ingredient 2",ylab="Relief", main="Main  effect, Ingredient 1") 
+
+```
+
+
+
+```{r fig-anovaII-i, fig.cap='Interaction plot', out.width='80%', fig.asp=.75, fig.align='center', cache = TRUE}
 interaction.plot(Hay$Ingredient.1, Hay$Ingredient.2, Hay$Relief)
 ```
 
@@ -95,7 +239,7 @@ anova(reduced_model,full_model)
 
 ```
 
-The test result show that interaction effects are very likely to be absent from this data set. This means that we need to treat each combination as a unit, whereas we can compare each type of main effects separately. In the Hay Fever data, we naturally want to the find the combination of ingredients that is most effective. We can use the Tukey-Kramer method for this task.
+The test result show that interaction effects are very unlikely to be absent from this data set. This means that we need to treat each combination as a unit, whereas we can compare each type of main effects separately. In the Hay Fever data, we naturally want to the find the combination of ingredients that is most effective. We can use the Tukey-Kramer method for this task.
 
 ```{r}
 library(stats)
@@ -133,29 +277,6 @@ plot(anova.fit)
     - Main effects
 * Missing data in the one observation per cell case 
 
-### Analysis of stratified experiments
-
-* Why stratification?
-
-We can check whether stratification is efficient on the auditor training data. 
-
-```{r} 
-Audit <- read.csv(file="./data/AuditorTraining.csv", header=TRUE, sep=",")
-
-# Or draw the interaction plot:
-interaction.plot(Audit$Block, Audit$Method,Audit$Proficiency)
-
-```
-
-```{r}
-# Fit the model with blocks:
-anova.block<-aov(Proficiency~as.factor(Block)+as.factor(Method),data=Audit)
-anova.random<-aov(Proficiency~as.factor(Method),data=Audit)
-
-mse.block<-sum(anova.block$residuals^2)/anova.block$df.residual
-mse.random<-sum(anova.random$residuals^2)/anova.random$df.residual
-(E=mse.random/mse.block)
-```
 
 
 ## Learning Objectives

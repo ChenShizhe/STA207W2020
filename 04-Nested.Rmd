@@ -5,6 +5,14 @@ output:
   html_document: default
 ---
 
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
+library(tidyr) 
+library(dplyr)
+library(qwraps2)
+library(gplots)
+options(digits=2)
+```
 
 # Random and Mixed Effect Models {#ch:nested}
 
@@ -22,18 +30,17 @@ output:
     - Repeated measures design 
 
 
+
 ## Random effects model
 
 * One-way ANOVA model with random effects
 * Estimation
     - Decomposition of variances
 * Hypothesis testing and confidence intervals 
+* Mixed effects model 
+* Unbalanced mixed and random effect models
 
-### Mixed effects model 
-
-### Unbalanced mixed and random effect models
-
-
+For more discussion, see Chapter 7 [here](https://stat.ethz.ch/~meier/teaching/anova/random-and-mixed-effects-models.html).
 
 ## Learning Objectives
 
@@ -41,5 +48,5 @@ output:
 * Students can properly decide whether to model a factor using fixed or random effects. 
 * Students recognize the key assumptions associated with the random effects model. 
 * Students can implement the aforemened tasks in `R`.
-* Students can explore extension of random effect model from the Internet. 
+* Students can explore extension of random effect model on the Internet. 
 

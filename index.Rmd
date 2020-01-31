@@ -19,7 +19,7 @@ output:
 
 # Preface {-#pre}
 
-This file contains code and comments in STA 207. Many materials in this document are adapted from lectures by Professors Prabir Burman, Peng Ding,   [Kosuke Imai](https://imai.fas.harvard.edu/teaching/index.html), and Zhichao Jiang.
+This file contains code and comments in STA 207. Many materials in this document are adapted from lectures by Professors Prabir Burman, Peng Ding,  [Lukas Meier](https://stat.ethz.ch/~meier/teaching/anova/), [Kosuke Imai](https://imai.fas.harvard.edu/teaching/index.html), and Zhichao Jiang.
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages

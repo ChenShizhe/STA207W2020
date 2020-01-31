@@ -32,10 +32,6 @@ options(digits=2)
 
 ## Analysis of repeated measures designs
 
-### Motivating data: blood pressure
-
-The relationship between the dose of a drug that increases blood pressure and the actual amount of increase in mean systolic blood pressure was investigated in a laboratory experiment. Twelve rabbits received in random order six different dose levels of the drug, with a suitable time interval between
-each drug administration. The increase in blood pressure was used as the response variable.
 
 ### Two-way ANOVA model
 
@@ -52,9 +48,45 @@ each drug administration. The increase in blood pressure was used as the respons
 * Two factors with repeated measures on both
 * Split-plot design
 
+For more discussion, see Chapter 8 [here](https://stat.ethz.ch/~meier/teaching/anova/split-plot-designs.html#). 
+
 ### Longitudinal data analysis
 
 We consider the rat growth data. Each rat is measured over 5 weeks. This type of data set is called longitudinal since the observations are taken over time. There is a covariate "mother's weight" (X). The idea is to see how rat weights vary over time since birth. In another example, logarithm of CD4 counts are listed for patients on three different treatments over time. Goal is to investigate how CD4 counts change over time and if age has any effect on
 this change. Note that in the first example, the times at which measurement are taken are the same for all subjects. In the second case times may be different for different patients.
 
-We consider several models to fit them in `R`. 
+```{r}
+Rat.growth <- read.csv(file="./data/Growth.csv", header=TRUE, sep=",")
+
+colorpicks = rainbow(n=length(unique(Rat.growth$rat)));
+with(Rat.growth, plot(weight, week,type='p', pch=16, bty='l',  main='Raw growth data', xlab='Week', ylab='Weight',col=colorpicks[rat]))
+for(i in 1:length(unique(Rat.growth$rat))){
+  one.rat=Rat.growth[Rat.growth$rat==i,]
+  with(one.rat, lines(weight, week,col=colorpicks[rat])）
+}
+# For more thoughts on visualization, see http://www.colbyimaging.com/wiki/statistics/longitudinal-data
+legend('bottomright', col=colorpicks, pch=c(16), legend=paste('Rat', unique(Rat.growth$rat)))
+
+```
+
+We consider several models to fit them in `R`.  For more on the syntax of `lmer` see the vignette [here](https://cran.r-project.org/web/packages/lme4/vignettes/lmer.pdf).
+
+
+```{r}
+library(lme4)
+lm1=lmer(weight~as.factor(week)+(1|rat),data=Rat.growth)
+lm2=lmer(weight~week+X+(1|rat),data=Rat.growth)
+lm3=lmer(weight~as.factor(week)+X+(1|rat),data=Rat.growth)
+lm4=lmer(weight~week+X+(1|rat)+(0+week|rat),data=Rat.growth)
+lm5=lmer(weight~week+I(week^2)+X+(1|rat),data=Rat.growth)
+lm6=lmer(weight~week+I(week^2)+X+(1|rat)+(0+week|rat)+(0+week^2|rat),data=Rat.growth)
+```
+
+```{r}
+# For model selection, we can use AIC, BIC 
+AIC(logLik(lm1))
+# or
+AIC(lm1,lm2)
+
+BIC(lm1,lm2,lm3,lm4,lm5,lm6)
+```
