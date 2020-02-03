@@ -21,6 +21,10 @@ options(digits=2)
 ## Experiments with two (or more) factors
 
 
+> "Block what you can and randomize what you cannot."
+
+> --- Box et al. (2005) 
+
 * Randomized experiments with two treatments 
 * Stratified randomized Experiments (also known as randomized block design)
     - Auditor training data 
@@ -29,6 +33,7 @@ options(digits=2)
 * Sampling scheme for a stratified randomized experiment
 * Question of interest, null hypotheses, and their causal interpretation. 
 * Intuition of hypothesis testing.
+
 
 
 
