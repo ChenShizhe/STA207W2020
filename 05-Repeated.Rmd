@@ -16,7 +16,6 @@ options(digits=2)
 
 # Repeated Measures Design {#ch:repeated}
 
-(In progress)
 
 ## Repeated measures design
 

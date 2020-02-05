@@ -107,12 +107,12 @@ text(x=5.1,y=2,labels=paste('With X,  Est. ACE = ',round(lm.X$coef[2,1],2), 'wit
 
 
 ```{r fig-strat, fig.cap='Estimation of ACE with and without adjusting for X under stratified randomization', out.width='80%', fig.asp=.75, fig.align='center', cache = TRUE}
-# Analysis, w/o stratification 
+# Analysis, w stratification 
 
 lm.simple=summary(lm(Y.s~Z.s));
 lm.strat=summary(lm(Y.s~Z.s+X));
 
-plot(y=Y.s,x=X,pch=16,col=c('red','blue')[Z+1])
+plot(y=Y.s,x=X,pch=16,col=c('red','blue')[Z.s+1])
 legend(x=1.1,y=22,legend=c('Trt','Ctrl'),col=c('red','blue'),pch=16)
 text(x=5.1,y=5,labels=paste('Without X, Est. ACE = ',round(lm.simple$coef[2,1],2), 'with s.e.', round(lm.simple$coef[2,2],2),sep=' '  ),pos=4  )
 

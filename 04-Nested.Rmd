@@ -16,8 +16,6 @@ options(digits=2)
 
 # Random and Mixed Effect Models {#ch:nested}
 
-(In progress)
-
 ## Nested design
 
 * Motivations for a nested design

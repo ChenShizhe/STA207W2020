@@ -125,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2020-02-03}
+    \date{2020-02-05}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -810,12 +810,12 @@ We can also explore the properties of blocking using simulation.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Analysis, w/o stratification }
+\CommentTok{# Analysis, w stratification }
 
 \NormalTok{lm.simple=}\KeywordTok{summary}\NormalTok{(}\KeywordTok{lm}\NormalTok{(Y.s}\OperatorTok{~}\NormalTok{Z.s));}
 \NormalTok{lm.strat=}\KeywordTok{summary}\NormalTok{(}\KeywordTok{lm}\NormalTok{(Y.s}\OperatorTok{~}\NormalTok{Z.s}\OperatorTok{+}\NormalTok{X));}
 
-\KeywordTok{plot}\NormalTok{(}\DataTypeTok{y=}\NormalTok{Y.s,}\DataTypeTok{x=}\NormalTok{X,}\DataTypeTok{pch=}\DecValTok{16}\NormalTok{,}\DataTypeTok{col=}\KeywordTok{c}\NormalTok{(}\StringTok{'red'}\NormalTok{,}\StringTok{'blue'}\NormalTok{)[Z}\OperatorTok{+}\DecValTok{1}\NormalTok{])}
+\KeywordTok{plot}\NormalTok{(}\DataTypeTok{y=}\NormalTok{Y.s,}\DataTypeTok{x=}\NormalTok{X,}\DataTypeTok{pch=}\DecValTok{16}\NormalTok{,}\DataTypeTok{col=}\KeywordTok{c}\NormalTok{(}\StringTok{'red'}\NormalTok{,}\StringTok{'blue'}\NormalTok{)[Z.s}\OperatorTok{+}\DecValTok{1}\NormalTok{])}
 \KeywordTok{legend}\NormalTok{(}\DataTypeTok{x=}\FloatTok{1.1}\NormalTok{,}\DataTypeTok{y=}\DecValTok{22}\NormalTok{,}\DataTypeTok{legend=}\KeywordTok{c}\NormalTok{(}\StringTok{'Trt'}\NormalTok{,}\StringTok{'Ctrl'}\NormalTok{),}\DataTypeTok{col=}\KeywordTok{c}\NormalTok{(}\StringTok{'red'}\NormalTok{,}\StringTok{'blue'}\NormalTok{),}\DataTypeTok{pch=}\DecValTok{16}\NormalTok{)}
 \KeywordTok{text}\NormalTok{(}\DataTypeTok{x=}\FloatTok{5.1}\NormalTok{,}\DataTypeTok{y=}\DecValTok{5}\NormalTok{,}\DataTypeTok{labels=}\KeywordTok{paste}\NormalTok{(}\StringTok{'Without X, Est. ACE = '}\NormalTok{,}\KeywordTok{round}\NormalTok{(lm.simple}\OperatorTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{],}\DecValTok{2}\NormalTok{), }\StringTok{'with s.e.'}\NormalTok{, }\KeywordTok{round}\NormalTok{(lm.simple}\OperatorTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{],}\DecValTok{2}\NormalTok{),}\DataTypeTok{sep=}\StringTok{' '}\NormalTok{  ),}\DataTypeTok{pos=}\DecValTok{4}\NormalTok{  )}
 
@@ -1164,8 +1164,6 @@ cell}\label{special-case-one-observation-per-cell}
 
 \chapter{Random and Mixed Effect Models}\label{ch:nested}
 
-(In progress)
-
 \section{Nested design}\label{nested-design}
 
 \begin{itemize}
@@ -1241,8 +1239,6 @@ For more discussion, see Chapter 7
 \end{itemize}
 
 \chapter{Repeated Measures Design}\label{ch:repeated}
-
-(In progress)
 
 \section{Repeated measures design}\label{repeated-measures-design}
 
