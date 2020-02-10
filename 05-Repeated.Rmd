@@ -89,3 +89,11 @@ AIC(lm1,lm2)
 
 BIC(lm1,lm2,lm3,lm4,lm5,lm6)
 ```
+
+
+
+## Learning Objectives
+
+* Students can recognize repeated measures designs. 
+* Students understand the basics of cohort studies.
+* Students can fit random effects model in `R`. 

@@ -37,7 +37,8 @@ options(digits=2)
 * Hypothesis testing and confidence intervals 
 * Mixed effects model 
 * Unbalanced mixed and random effect models
-
+    - REML (see among others, [this note](http://www2.compute.dtu.dk/courses/02429/enotepdfs/eNote-10.pdf))
+    
 For more discussion, see Chapter 7 [here](https://stat.ethz.ch/~meier/teaching/anova/random-and-mixed-effects-models.html).
 
 ## Learning Objectives

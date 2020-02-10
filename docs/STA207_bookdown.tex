@@ -125,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2020-02-05}
+    \date{2020-02-10}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -678,11 +678,8 @@ For Box-Cox transformation, use the \texttt{boxcox} in library
 factors}\label{experiments-with-two-or-more-factors}
 
 \begin{quote}
-``Block what you can and randomize what you cannot.''
-\end{quote}
-
-\begin{quote}
---- Box et al. (2005)
+``Block what you can and randomize what you cannot.'' --- Box et al.
+(2005)
 \end{quote}
 
 \begin{itemize}
@@ -884,7 +881,7 @@ We can also explore the properties of blocking using simulation.
 
 Q: Why conducting stratify randomization given the simulation results?
 
-For more discussion, see Chapters 6 and 8 in
+For more discussion, see Chapters 6 and 9 in
 \href{https://stat.ethz.ch/~meier/teaching/anova/}{ANOVA: A Short Intro
 Using R} by Lukas Meier.
 
@@ -1214,6 +1211,14 @@ cell}\label{special-case-one-observation-per-cell}
   Mixed effects model
 \item
   Unbalanced mixed and random effect models
+
+  \begin{itemize}
+  \tightlist
+  \item
+    REML (see among others,
+    \href{http://www2.compute.dtu.dk/courses/02429/enotepdfs/eNote-10.pdf}{this
+    note})
+  \end{itemize}
 \end{itemize}
 
 For more discussion, see Chapter 7
@@ -1393,6 +1398,18 @@ syntax of \texttt{lmer} see the vignette
 ## lm5  6 401
 ## lm6  8 409
 \end{verbatim}
+
+\section{Learning Objectives}\label{learning-objectives-4}
+
+\begin{itemize}
+\tightlist
+\item
+  Students can recognize repeated measures designs.
+\item
+  Students understand the basics of cohort studies.
+\item
+  Students can fit random effects model in \texttt{R}.
+\end{itemize}
 
 \chapter{Case-control Study}\label{ch:case}
 

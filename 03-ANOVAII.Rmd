@@ -22,7 +22,6 @@ options(digits=2)
 
 
 > "Block what you can and randomize what you cannot."
-
 > --- Box et al. (2005) 
 
 * Randomized experiments with two treatments 
@@ -162,7 +161,7 @@ sim.result=replicate(n=1e4,strat.sim(ACE=ACE));
 Q: Why conducting stratify randomization given the simulation results? 
 
 
-For more discussion, see Chapters 6 and 8 in [ANOVA: A Short Intro Using R](https://stat.ethz.ch/~meier/teaching/anova/) by Lukas Meier. 
+For more discussion, see Chapters 6 and 9 in [ANOVA: A Short Intro Using R](https://stat.ethz.ch/~meier/teaching/anova/) by Lukas Meier. 
 
 ## Two-way ANOVA
 
