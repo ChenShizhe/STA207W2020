@@ -16,6 +16,10 @@ options(digits=2)
 
 # Random and Mixed Effect Models {#ch:nested}
 
+> If your experiment needs statistics, you ought to have done a better
+experiment.
+> ---  Ernest Rutherford
+
 ## Nested design
 
 * Motivations for a nested design
