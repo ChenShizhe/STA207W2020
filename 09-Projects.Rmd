@@ -47,12 +47,12 @@ The dataset contains scaled scores for math and reading from kindergarten to 3rd
 
 ## Project 2: Project STAR II
 
-## Background
+### Background
 
 We will continue our study on Project STAR. In the previous project, we examine the effects on individual students. Here we consider each teacher as the individual unit. Moreover, we will also explore the longitudinal feature of this dataset and the fact that randomization happened within schools. 
 
 
-## Tasks 
+### Tasks 
 
 1.  Explore math scaled scores in the 1st with teachers as the unit. Generate summary statistics (in forms of tables or plots) that you find informative, and explain them. 
 
@@ -77,7 +77,7 @@ In any of these tasks, if a statistical method is employed, you need to clearly 
 
 ## Project 3: US Traffic Fatalities
 
-## Background
+### Background
 
 
 The National Highway Traffic Safety Administration reported that there are 36,560  highway fatalities across US in 2018 ([link](nhtsa.gov/press-releases/roadway-fatalities-2018-fars)). 
@@ -96,7 +96,7 @@ Total vehicle miles traveled annually by state was obtained from the Department 
 
 
 
-## Tasks 
+### Tasks 
 
 1.  Explore this dataset and generate summary statistics (in forms of tables or plots) that you find crucial for your own interest, or for convincing the policy makers. 
 
@@ -111,7 +111,7 @@ Total vehicle miles traveled annually by state was obtained from the Department 
 
 4.  Explain the implications of your results to policy makers who know little about statistics. Make suggestions if you want to. 
 
-## Hints
+### Hints
 
 1.  Take a look at the helpfile for this data set. 
 2.  You may want to think about the causal interprettion (2.f) before finding an appropriate model (2.a).
@@ -122,13 +122,13 @@ Total vehicle miles traveled annually by state was obtained from the Department 
 
 ## Project 4: Bank Marketing
 
-## Background
+### Background
 
 A Portuguese retail bank started a telemarketing campaign in 2008, aiming to subscribe new users to a long-term deposit. Information collected during the campaign was recorded in this data set. More information is available on the UCI machine learning repository  ([link](https://archive.ics.uci.edu/ml/datasets/Bank+Marketing#)) and the citations therein. 
 
 You are a consultant who is hired to study the retail banking market in Portugese. Somehow you come to know such a dataset is publicly available. Naturally, you want to gain some insights of the market from this dataset, before conducting an expensive survey. 
 
-## Tasks 
+### Tasks 
 
 1.  Acquire the dataset from the UCI machine learning repository ([link](https://archive.ics.uci.edu/ml/datasets/Bank+Marketing#)). 
 2.  Pick an appropriate data set to study, and justify your decision. 
@@ -143,7 +143,7 @@ You are a consultant who is hired to study the retail banking market in Portuges
 
 In any of these tasks, if a statistical method is employed, you need to clearly state the model and justify your choice. 
 
-## Hints
+### Hints
 
 1.  Pay close attention to the dataset (Task 3) before building your prediction model.
 2.  You may use random forest in Task 5 if you have no other methods in mind. 

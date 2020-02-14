@@ -58,7 +58,7 @@ this change. Note that in the first example, the times at which measurement are 
 Rat.growth <- read.csv(file="./data/Growth.csv", header=TRUE, sep=",")
 
 colorpicks = rainbow(n=length(unique(Rat.growth$rat)));
-with(Rat.growth, plot(weight, week,type='p', pch=16, bty='l',  main='Raw growth data', xlab='Week', ylab='Weight',col=colorpicks[rat]))
+with(Rat.growth, plot(y=weight, x=week,type='p', pch=16, bty='l',  main='Raw growth data', xlab='Week', ylab='Weight',col=colorpicks[rat]))
 for(i in 1:length(unique(Rat.growth$rat))){
   one.rat=Rat.growth[Rat.growth$rat==i,]
   with(one.rat, lines(weight, week,col=colorpicks[rat])）
